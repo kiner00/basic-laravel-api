@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Resources\PersonResource;
 use App\Http\Resources\PersonResourceCollection;
 use Illuminate\Http\Request;
 use App\Person;
+use App\Http\Controllers\Controller;
 
 class PersonController extends Controller
 {
@@ -45,10 +46,27 @@ class PersonController extends Controller
         return new PersonResource($person);
     }
 
+    /**
+     * @param Person $person
+     * @param Request $request
+     * @return PersonResource
+     */
     public function update(Person $person, Request $request): PersonResource
     {
         $person->update($request->all());
 
         return new PersonResource($person);
+    }
+
+    /**
+     * @param Person $person
+     * @return JsonResponse
+     * @throws \Exeception
+     */
+    public function destroy(Person $person)
+    {
+        $person->delete();
+
+        return response()->json();
     }
 }
