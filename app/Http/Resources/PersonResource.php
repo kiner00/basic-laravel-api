@@ -14,6 +14,17 @@ class PersonResource extends JsonResource
      */
     public function toArray($request)
     {
+        /**
+         * If you want to show all data
+         */
         return parent::toArray($request);
+
+        /**
+         * Specific array to show
+         */
+        // return [
+        //     'first_name' => $this->first_name,
+        //     'last_name' => $this->last_name,
+        // ];
     }
 }
